@@ -1,11 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
 import { Col, Row } from "react-bootstrap";
+import { selectedSong } from "../redux/actions";
 
 const MainHome = () => {
   const searchedSongs = useSelector(state => state.searchAlbum.searchedSongs);
+
+  const dispatch = useDispatch();
+
+  const handleClick = songSelected => {
+    dispatch(selectedSong(songSelected));
+  };
 
   return (
     <main className="col-12 col-md-9 offset-md-3 mainPage">
@@ -20,7 +27,7 @@ const MainHome = () => {
       </div>
       <Row>
         {searchedSongs.slice(0, 4).map(song => (
-          <Col xs={6} lg={3} key={song.id} className="mt-5">
+          <Col xs={6} lg={3} key={song.id} className="mt-5" onClick={handleClick(song)}>
             <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
             <p>
               Track: {song.title}

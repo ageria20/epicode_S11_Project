@@ -37,9 +37,9 @@ const FirstRow = () => {
         <i
           onClick={() => handleLike()}
           className={
-            song.id && isLike
-              ? "bi bi-heart position-absolute bottom-0 end-0 m-3"
-              : "bi bi-heart-fill position-absolute bottom-0 end-0 m-3"
+            isLike
+              ? "bi bi-heart-fill position-absolute bottom-0 end-0 m-3"
+              : "bi bi-heart position-absolute bottom-0 end-0 m-3"
           }
         ></i>
       </div>

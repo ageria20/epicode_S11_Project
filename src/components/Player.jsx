@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 
 const Player = props => {
   const selectedSong = useSelector(state => state.mainHomeReducer.selected);
-  console.log(selectedSong);
+  // console.log(selectedSong);
+
   return (
     <div className="container-fluid fixed-bottom bg-container pt-1">
       <div className="row h-100">
