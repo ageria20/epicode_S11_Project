@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
+import { Col, Row } from "react-bootstrap";
 
 const MainHome = () => {
+  const searchedSongs = useSelector(state => state.searchAlbum.searchedSongs);
+
   return (
     <main className="col-12 col-md-9 offset-md-3 mainPage">
       <div className="row">
@@ -14,6 +18,18 @@ const MainHome = () => {
           <a href="#">DISCOVER</a>
         </div>
       </div>
+      <Row>
+        {searchedSongs.slice(0, 4).map(song => (
+          <Col key={song.id}>
+            <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
+            <p>
+              Track: {song.title}
+              <br />
+              Artist: {song.artist.name}
+            </p>
+          </Col>
+        ))}
+      </Row>
       <div className="row">
         <div className="col-10">
           <div id="rock">

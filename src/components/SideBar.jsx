@@ -1,9 +1,21 @@
-import { Col, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Col, FormControl, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { searchFetch } from "../redux/actions";
 
 const SideBar = props => {
   const likedSong = useSelector(state => state.mainHomeReducer.likedSongs);
+  const query = useSelector(state => state.searchAlbum.query);
+  const dispatch = useDispatch();
   console.log(likedSong);
+
+  const handleChange = e => {
+    dispatch({ type: "QUERY", payload: e.target.value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    dispatch(searchFetch(query));
+  };
 
   return (
     <nav className="navbar navbar-expand-md fixed-left justify-content-between" id="sidebar">
@@ -37,9 +49,17 @@ const SideBar = props => {
               </li>
               <li>
                 <div className="input-group mt-3">
-                  <input type="text" className="form-control" placeholder="Search" aria-label="Search" />
+                  <FormControl
+                    type="text"
+                    value={query}
+                    onChange={handleChange}
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
                   <div className="input-group-append">
-                    <button className="btn btn-outline-secondary btn-sm h-100">GO</button>
+                    <button className="btn btn-outline-secondary btn-sm h-100" onClick={e => handleSubmit(e)}>
+                      GO
+                    </button>
                   </div>
                 </div>
               </li>

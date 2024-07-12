@@ -175,7 +175,6 @@ ul {
   display: none;
 }
  */
-
-.bi-heart:hover {
-  fill: green;
+.likeHeart {
+  fill: red;
 }
