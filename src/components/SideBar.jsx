@@ -6,7 +6,6 @@ const SideBar = props => {
   const likedSong = useSelector(state => state.mainHomeReducer.likedSongs);
   const query = useSelector(state => state.searchAlbum.query);
   const dispatch = useDispatch();
-  console.log(likedSong);
 
   const handleChange = e => {
     dispatch({ type: "QUERY", payload: e.target.value });

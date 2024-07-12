@@ -20,7 +20,7 @@ const MainHome = () => {
       </div>
       <Row>
         {searchedSongs.slice(0, 4).map(song => (
-          <Col key={song.id}>
+          <Col xs={6} lg={3} key={song.id} className="mt-5">
             <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
             <p>
               Track: {song.title}
