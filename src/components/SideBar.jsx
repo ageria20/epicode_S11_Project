@@ -1,4 +1,10 @@
+import { Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+
 const SideBar = props => {
+  const likedSong = useSelector(state => state.mainHomeReducer.likedSongs);
+  console.log(likedSong);
+
   return (
     <nav className="navbar navbar-expand-md fixed-left justify-content-between" id="sidebar">
       <div className="container flex-column align-items-start">
@@ -36,6 +42,21 @@ const SideBar = props => {
                     <button className="btn btn-outline-secondary btn-sm h-100">GO</button>
                   </div>
                 </div>
+              </li>
+              <li>
+                <Row>
+                  {likedSong.length > 0 && (
+                    <>
+                      <Col xs={12} md={3}>
+                        <img src={likedSong[0].album.cover_small} alt="cover album" />
+                      </Col>
+                      <Col xs={12} md={9}>
+                        <h5 style={{ color: "white", fontSize: "1rem" }}>Now Playing: {likedSong[0].title}</h5>
+                        <p style={{ color: "white", fontSize: "0.8rem" }}>Artist: {likedSong[0].artist.name}</p>
+                      </Col>
+                    </>
+                  )}
+                </Row>
               </li>
             </ul>
           </div>

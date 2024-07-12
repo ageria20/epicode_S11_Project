@@ -170,3 +170,12 @@ ul {
 .mainPage img {
   width: 200px;
 }
+
+/* .bi-heart {
+  display: none;
+}
+ */
+
+.bi-heart:hover {
+  fill: green;
+}

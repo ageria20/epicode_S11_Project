@@ -1,8 +1,11 @@
 export const ROCK_CLASSIC = "ROCK_CLASSIC";
 export const POP_CULTURE = "POP_CULTURE";
 export const HIP_HOP = "HIP_HOP";
+export const SELECTED_SONG = "SELECTED_SONG";
 
 export const addSongs = (type, songs) => ({ type: type, payload: songs });
+export const selectedSong = song => ({ type: SELECTED_SONG, payload: song });
+
 // export const addPopSongs = songs => ({ type: POP_CULTURE, payload: songs });
 // export const addHipHopSongs = songs => ({ type: HIP_HOP, payload: songs });
 

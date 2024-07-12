@@ -2,6 +2,9 @@ const initialState = {
   rockClassic: [],
   popCulture: [],
   hipHop: [],
+  selected: null,
+  likedSongs: [],
+  isSelected: false,
 };
 
 const mainHomeReducer = (state = initialState, action) => {
@@ -21,6 +24,22 @@ const mainHomeReducer = (state = initialState, action) => {
         ...state,
         hipHop: action.payload,
       };
+    case "SELECTED_SONG":
+      return {
+        ...state,
+        selected: action.payload,
+      };
+    case "LIKED_SONGS":
+      return {
+        ...state,
+        likedSongs: state.likedSongs.concat(action.payload),
+      };
+    case "IS_SELECTED":
+      return {
+        ...state,
+        isSelected: action.payload,
+      };
+
     default:
       return state;
   }
