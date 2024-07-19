@@ -4,6 +4,8 @@ export const HIP_HOP = "HIP_HOP";
 export const SELECTED_SONG = "SELECTED_SONG";
 export const IS_LIKE = "IS_LIKE";
 export const SEARCHED = "SEARCHED";
+export const REMOVE_FAV = "REMOVE_FAV";
+export const ADD_FAV = "ADD_FAV";
 
 export const addSongs = (type, songs) => ({ type: type, payload: songs });
 export const selectedSong = song => ({ type: SELECTED_SONG, payload: song });

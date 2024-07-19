@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSongs, selectedSong, toggleLike } from "../redux/actions/index";
+import { ADD_FAV, getSongs, REMOVE_FAV } from "../redux/actions/index";
 
 const FirstRow = () => {
   const rockSongs = useSelector(state => state.mainHomeReducer.rockClassic);
@@ -9,11 +9,11 @@ const FirstRow = () => {
   const dispatch = useDispatch();
 
   const handleClick = songSelected => {
-    dispatch(selectedSong(songSelected));
+    dispatch({ type: ADD_FAV, payload: songSelected });
   };
 
   const handleLike = songSelected => {
-    dispatch(toggleLike());
+    dispatch({ type: REMOVE_FAV, payload: songSelected });
   };
 
   useEffect(() => {
@@ -35,7 +35,9 @@ const FirstRow = () => {
         <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
 
         <i
-          onClick={() => handleLike()}
+          onClick={() => {
+            handleLike();
+          }}
           className={
             isLike
               ? "bi bi-heart-fill position-absolute bottom-0 end-0 m-3"

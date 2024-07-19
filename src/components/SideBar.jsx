@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchFetch } from "../redux/actions";
 
 const SideBar = props => {
-  const likedSong = useSelector(state => state.mainHomeReducer.likedSongs);
+  const likedSong = useSelector(state => state.favourites.likedSongs);
   const query = useSelector(state => state.searchAlbum.query);
   const dispatch = useDispatch();
 
