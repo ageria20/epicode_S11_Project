@@ -3,7 +3,6 @@ const initialState = {
   popCulture: [],
   hipHop: [],
   selected: null,
-  isLike: false,
 };
 
 const mainHomeReducer = (state = initialState, action) => {

@@ -1,19 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_FAV, getSongs, REMOVE_FAV } from "../redux/actions/index";
+import { ADD_FAV, getSongs, REMOVE_FAV, SELECTED_SONG } from "../redux/actions/index";
 
 const FirstRow = () => {
   const rockSongs = useSelector(state => state.mainHomeReducer.rockClassic);
-  const isLike = useSelector(state => state.mainHomeReducer.isLike);
+
+  const likedSongs = useSelector(state => state.favourites.likedSongs);
 
   const dispatch = useDispatch();
 
-  const handleClick = songSelected => {
-    dispatch({ type: ADD_FAV, payload: songSelected });
+  const isSelected = song => {
+    likedSongs.some(likedSong => likedSong?.id === song.id);
   };
 
-  const handleLike = songSelected => {
-    dispatch({ type: REMOVE_FAV, payload: songSelected });
+  const handleClick = songSelected => {
+    isSelected(songSelected)
+      ? dispatch({ type: ADD_FAV, payload: songSelected })
+      : dispatch({ type: REMOVE_FAV, payload: songSelected });
   };
 
   useEffect(() => {
@@ -27,8 +30,7 @@ const FirstRow = () => {
       className="col text-center"
       key={song.id}
       onClick={() => {
-        console.log(isLike);
-        handleClick(song);
+        dispatch({ type: SELECTED_SONG, payload: song });
       }}
     >
       <div className="position-relative">
@@ -36,10 +38,10 @@ const FirstRow = () => {
 
         <i
           onClick={() => {
-            handleLike();
+            handleClick(song);
           }}
           className={
-            isLike
+            isSelected(song)
               ? "bi bi-heart-fill position-absolute bottom-0 end-0 m-3"
               : "bi bi-heart position-absolute bottom-0 end-0 m-3"
           }
