@@ -1,27 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_FAV, getSongs, REMOVE_FAV, SELECTED_SONG } from "../redux/actions/index";
+import { Heart, HeartFill } from "react-bootstrap-icons";
 
 const FirstRow = () => {
   const rockSongs = useSelector(state => state.mainHomeReducer.rockClassic);
-
+  const selected = useSelector(state => state.mainHomeReducer.selected);
   const likedSongs = useSelector(state => state.favourites.likedSongs);
 
   const dispatch = useDispatch();
 
-  const isSelected = song => {
-    likedSongs.some(likedSong => likedSong?.id === song.id);
-  };
-
-  const handleClick = songSelected => {
-    isSelected(songSelected)
-      ? dispatch({ type: ADD_FAV, payload: songSelected })
-      : dispatch({ type: REMOVE_FAV, payload: songSelected });
-  };
+  const isSelected = likedSongs.some(likedSong => likedSong?.id === selected?.id);
 
   useEffect(() => {
     dispatch(getSongs("ROCK_CLASSIC", "queen"));
-    console.log(rockSongs);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -36,16 +29,19 @@ const FirstRow = () => {
       <div className="position-relative">
         <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
 
-        <i
-          onClick={() => {
-            handleClick(song);
-          }}
-          className={
-            isSelected(song)
-              ? "bi bi-heart-fill position-absolute bottom-0 end-0 m-3"
-              : "bi bi-heart position-absolute bottom-0 end-0 m-3"
-          }
-        ></i>
+        {isSelected ? (
+          <HeartFill
+            className="position-absolute"
+            style={{ bottom: "20", left: "0" }}
+            onClick={() => dispatch({ type: ADD_FAV, payload: song })}
+          />
+        ) : (
+          <Heart
+            className="position-absolute"
+            style={{ bottom: "10", right: "10" }}
+            onClick={() => dispatch({ type: REMOVE_FAV, payload: song })}
+          />
+        )}
       </div>
       <p>
         Track: {song.title}
