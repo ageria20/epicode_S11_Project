@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchFetch } from "../redux/actions";
 
 const SideBar = props => {
-  const likedSong = useSelector(state => state.favourites.likedSongs);
+  const likedSongs = useSelector(state => state.favourites.likedSongs);
   const query = useSelector(state => state.searchAlbum.query);
   const dispatch = useDispatch();
 
@@ -64,17 +64,20 @@ const SideBar = props => {
               </li>
               <li>
                 <Row>
-                  {likedSong.length > 0 && (
-                    <>
-                      <Col xs={12} md={3}>
-                        <img src={likedSong[0].album.cover_small} alt="cover album" />
-                      </Col>
-                      <Col xs={12} md={9}>
-                        <h5 style={{ color: "white", fontSize: "1rem" }}>Now Playing: {likedSong[0].title}</h5>
-                        <p style={{ color: "white", fontSize: "0.8rem" }}>Artist: {likedSong[0].artist.name}</p>
-                      </Col>
-                    </>
-                  )}
+                  {likedSongs.length > 0 &&
+                    likedSongs.map(likedSong => {
+                      return (
+                        <>
+                          <Col xs={12} md={3}>
+                            <img src={likedSong.album.cover_small} alt="cover album" />
+                          </Col>
+                          <Col xs={12} md={9}>
+                            <h5 style={{ color: "white", fontSize: "1rem" }}>Now Playing: {likedSong.title}</h5>
+                            <p style={{ color: "white", fontSize: "0.8rem" }}>Artist: {likedSong.artist.name}</p>
+                          </Col>
+                        </>
+                      );
+                    })}
                 </Row>
               </li>
             </ul>

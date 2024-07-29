@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_FAV, getSongs, REMOVE_FAV, SELECTED_SONG } from "../redux/actions/index";
+import { getSongs } from "../redux/actions/index";
 import { Heart, HeartFill } from "react-bootstrap-icons";
 
 const FirstRow = () => {
@@ -16,14 +16,15 @@ const FirstRow = () => {
     dispatch(getSongs("ROCK_CLASSIC", "queen"));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
+  }, [dispatch, selected]);
+  console.log(selected?.id);
+  console.log(isSelected);
   return rockSongs.slice(0, 4).map(song => (
     <div
       className="col text-center"
       key={song.id}
       onClick={() => {
-        dispatch({ type: SELECTED_SONG, payload: song });
+        dispatch({ type: "SELECTED_SONG", payload: song });
       }}
     >
       <div className="position-relative">
@@ -32,14 +33,18 @@ const FirstRow = () => {
         {isSelected ? (
           <HeartFill
             className="position-absolute"
-            style={{ bottom: "20", left: "0" }}
-            onClick={() => dispatch({ type: ADD_FAV, payload: song })}
+            style={{ bottom: "10", right: "10" }}
+            onClick={() => {
+              dispatch({ type: "REMOVE_FAV", payload: song });
+            }}
           />
         ) : (
           <Heart
             className="position-absolute"
             style={{ bottom: "10", right: "10" }}
-            onClick={() => dispatch({ type: REMOVE_FAV, payload: song })}
+            onClick={() => {
+              dispatch({ type: "ADD_FAV", payload: song });
+            }}
           />
         )}
       </div>
