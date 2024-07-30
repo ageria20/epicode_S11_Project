@@ -25,7 +25,7 @@ const FirstRow = () => {
         }}
       >
         <div className="position-relative">
-          <img className="img-fluid position-relative" src={song.album.cover_medium} alt="track" />
+          <img className="img-fluid" src={song.album.cover_medium} alt="track" />
           {isSelected ? (
             <HeartFill
               className="position-absolute"
